@@ -14,7 +14,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🚦 SIMULASI PAPAN INFORMASI")
+st.title("SIMULASI PAPAN INFORMASI")
 placeholder = st.empty()
 
 while True:
