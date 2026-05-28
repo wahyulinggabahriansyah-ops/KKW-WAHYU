@@ -4,7 +4,7 @@ Sistem Pemantauan Parkir Pintar berbasis **Computer Vision**, **Artificial Intel
 
 ---
 
-## Fitur Utama
+## Fitur Utama acong
 
 - **Pemetaan Interaktif (`mapping.py`)**: Alat berbasis OpenCV untuk menggambar poligon petak parkir secara interaktif dengan klik mouse (4 titik per petak). Koordinat disimpan secara otomatis ke format JSON.
 - **Deteksi AI Presisi Tinggi (`main.py`, `kamera2.py`, `kamera3.py`)**: Menggunakan model YOLOv8 Nano (`yolov8n.pt`) untuk mendeteksi kendaraan secara efisien tanpa memerlukan GPU berspesifikasi tinggi.
