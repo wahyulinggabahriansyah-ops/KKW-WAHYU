@@ -8,7 +8,7 @@ st.set_page_config(page_title="Papan Parkir Digital", layout="centered")
 st.markdown("""
 <style>
     .led-container { background-color: #000000; padding: 30px; border-radius: 15px; border: 4px solid #333; text-align: center; font-family: 'Courier New', Courier, monospace; }
-    .teks-judul { color: red; font-size: 40px; margin-bottom: 20px; }
+    .teks-judul { color: #FFFFFF; font-size: 40px; margin-bottom: 20px; }
     .teks-kosong { color: #00FF00; font-size: 70px; font-weight: bold; margin: 0; }
     .teks-terisi { color: #FF0000; font-size: 70px; font-weight: bold; margin: 0; }
 </style>
