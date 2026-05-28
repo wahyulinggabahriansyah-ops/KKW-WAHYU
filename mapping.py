@@ -58,7 +58,7 @@ else:
     # Menyimpan data koordinat ke file JSON
     if len(semua_petak) > 0:
         data_json = {"petak_parkir": semua_petak}
-        with open("koordinat_parkir_3.json", "w") as f:
+        with open("koordinat_parkir.json_3", "w") as f:
             json.dump(data_json, f, indent=4)
         print(f"\nBerhasil! {len(semua_petak)} petak parkir telah disimpan ke 'koordinat_parkir_3.json'.")
     else:
