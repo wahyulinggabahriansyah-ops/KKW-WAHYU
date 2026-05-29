@@ -40,7 +40,7 @@ while True:
     with placeholder.container():
         st.markdown(f"""
         <div class="led-container">
-            <div class="teks-judul">INFO PARKIR JALAN</div>
+            <div class="teks-judul">INFORMASI PARKIR ON STREET</div>
             <div class="teks-kosong">KOSONG : {total_kosong}</div>
             <div class="teks-terisi">TERISI : {total_terisi}</div>
         </div>
