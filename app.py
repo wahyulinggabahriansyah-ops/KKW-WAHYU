@@ -20,7 +20,7 @@ st.markdown("""
         font-family: 'Times New Roman', Times, serif !important;
     }
     .led-container { position: relative; background-color: #000000; padding: 50px 30px 45px 30px; border-radius: 15px; border: 4px solid #333; text-align: center; }
-    .teks-judul { color: #FFFFFF; font-size: 40px; font-weight: bold; margin-top: 10px; margin-bottom: 25px; padding-left: 80px; padding-right: 80px; line-height: 1.2; }
+    .teks-judul { color: #FFFFFF; font-size: 40px; font-weight: bold; margin-top: 10px; margin-bottom: 25px; padding-left: 90px; padding-right: 90px; line-height: 1.2; }
     .teks-kosong { color: #00FF00; font-size: 70px; font-weight: bold; margin: 20px 0 10px 0; line-height: 1.2; }
     .teks-terisi { color: #FF0000; font-size: 70px; font-weight: bold; margin: 10px 0 20px 0; line-height: 1.2; }
 </style>
@@ -52,6 +52,7 @@ while True:
     with placeholder.container():
         st.markdown(f"""
         <div class="led-container">
+            <img src="LOGO PERHUBUNGANN.png" width="75" style="position: absolute; top: 15px; left: 15px; object-fit: contain;">
             <img src="data:image/png;base64,{logo_base64}" width="75" style="position: absolute; top: 15px; right: 15px; object-fit: contain;">
             <div class="teks-judul">INFORMASI PARKIR ON STREET</div>
             <div class="teks-kosong">KOSONG : {total_kosong}</div>
