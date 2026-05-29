@@ -2,6 +2,15 @@ import streamlit as st
 import sqlite3
 import pandas as pd
 import time
+import base64
+
+# Mengonversi logo PTDI STTD menjadi base64 agar dapat dimuat oleh Streamlit secara lokal
+logo_base64 = ""
+try:
+    with open("logo PTDI STTD.png", "rb") as image_file:
+        logo_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+except Exception as e:
+    pass
 
 st.set_page_config(page_title="Papan Parkir Digital", layout="centered")
 
@@ -10,10 +19,10 @@ st.markdown("""
     * {
         font-family: 'Times New Roman', Times, serif !important;
     }
-    .led-container { background-color: #000000; padding: 30px; border-radius: 15px; border: 4px solid #333; text-align: center; }
-    .teks-judul { color: #FFFFFF; font-size: 40px; margin-bottom: 20px; font-weight: bold; }
-    .teks-kosong { color: #00FF00; font-size: 70px; font-weight: bold; margin: 0; }
-    .teks-terisi { color: #FF0000; font-size: 70px; font-weight: bold; margin: 0; }
+    .led-container { position: relative; background-color: #000000; padding: 45px 30px 30px 30px; border-radius: 15px; border: 4px solid #333; text-align: center; }
+    .teks-judul { color: #FFFFFF; font-size: 38px; font-weight: bold; margin-top: 10px; margin-bottom: 25px; }
+    .teks-kosong { color: #00FF00; font-size: 70px; font-weight: bold; margin: 20px 0 10px 0; }
+    .teks-terisi { color: #FF0000; font-size: 70px; font-weight: bold; margin: 10px 0 20px 0; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -43,9 +52,7 @@ while True:
     with placeholder.container():
         st.markdown(f"""
         <div class="led-container">
-            <div style="text-align: center; margin-bottom: 15px;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Logo_Kementerian_Perhubungan.svg" width="100">
-            </div>
+            <img src="data:image/png;base64,{logo_base64}" width="75" style="position: absolute; top: 15px; right: 15px; object-fit: contain;">
             <div class="teks-judul">INFORMASI PARKIR ON STREET</div>
             <div class="teks-kosong">KOSONG : {total_kosong}</div>
             <div class="teks-terisi">TERISI : {total_terisi}</div>
