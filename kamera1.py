@@ -23,7 +23,7 @@ cap = cv2.VideoCapture('video_parkir.mp4')
 kelas_kendaraan = [2, 3, 5, 7] # 2: Mobil, 3: Motor, 5: Bus, 7: Truk
 
 ### 3. PENGATURAN LOGIKA TEMPORAL & JENDELA TAMPILAN ###
-batas_waktu_frame = 3 
+batas_waktu_frame = 30
 tracker_waktu = {i: 0 for i in range(jumlah_petak)}
 status_akhir = {i: "KOSONG" for i in range(jumlah_petak)}
 
