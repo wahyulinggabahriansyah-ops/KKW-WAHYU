@@ -19,10 +19,10 @@ st.markdown("""
     * {
         font-family: 'Times New Roman', Times, serif !important;
     }
-    .led-container { position: relative; background-color: #000000; padding: 45px 30px 30px 30px; border-radius: 15px; border: 4px solid #333; text-align: center; }
-    .teks-judul { color: #FFFFFF; font-size: 38px; font-weight: bold; margin-top: 10px; margin-bottom: 25px; }
-    .teks-kosong { color: #00FF00; font-size: 70px; font-weight: bold; margin: 20px 0 10px 0; }
-    .teks-terisi { color: #FF0000; font-size: 70px; font-weight: bold; margin: 10px 0 20px 0; }
+    .led-container { position: relative; background-color: #000000; padding: 35px 30px 30px 30px; border-radius: 15px; border: 4px solid #333; text-align: center; }
+    .teks-judul { color: #FFFFFF; font-size: 36px; font-weight: bold; margin-top: 5px; margin-bottom: 10px; padding-left: 80px; padding-right: 80px; line-height: 1.2; }
+    .teks-kosong { color: #00FF00; font-size: 70px; font-weight: bold; margin: 5px 0; }
+    .teks-terisi { color: #FF0000; font-size: 70px; font-weight: bold; margin: 5px 0; }
 </style>
 """, unsafe_allow_html=True)
 
