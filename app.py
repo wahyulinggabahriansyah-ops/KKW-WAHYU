@@ -12,6 +12,14 @@ try:
 except Exception as e:
     pass
 
+# Mengonversi logo Perhubungan menjadi base64 agar dapat dimuat oleh Streamlit secara lokal
+logo_kemenhub_base64 = ""
+try:
+    with open("logo Perhubungan.png", "rb") as image_file:
+        logo_kemenhub_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+except Exception as e:
+    pass
+
 st.set_page_config(page_title="Papan Parkir Digital", layout="centered")
 
 st.markdown("""
@@ -52,7 +60,7 @@ while True:
     with placeholder.container():
         st.markdown(f"""
         <div class="led-container">
-            <img src="LOGO PERHUBUNGANN.png" width="75" style="position: absolute; top: 15px; left: 15px; object-fit: contain;">
+            <img src="data:image/png;base64,{logo_kemenhub_base64}" width="75" style="position: absolute; top: 15px; left: 15px; object-fit: contain;">
             <img src="data:image/png;base64,{logo_base64}" width="75" style="position: absolute; top: 15px; right: 15px; object-fit: contain;">
             <div class="teks-judul">INFORMASI PARKIR ON STREET</div>
             <div class="teks-kosong">KOSONG : {total_kosong}</div>
