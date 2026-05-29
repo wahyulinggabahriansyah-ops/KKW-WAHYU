@@ -7,8 +7,11 @@ st.set_page_config(page_title="Papan Parkir Digital", layout="centered")
 
 st.markdown("""
 <style>
-    .led-container { background-color: #000000; padding: 30px; border-radius: 15px; border: 4px solid #333; text-align: center; font-family: 'Courier New', Courier, monospace; }
-    .teks-judul { color: #FFFFFF; font-size: 40px; margin-bottom: 20px; }
+    * {
+        font-family: 'Times New Roman', Times, serif !important;
+    }
+    .led-container { background-color: #000000; padding: 30px; border-radius: 15px; border: 4px solid #333; text-align: center; }
+    .teks-judul { color: #FFFFFF; font-size: 40px; margin-bottom: 20px; font-weight: bold; }
     .teks-kosong { color: #00FF00; font-size: 70px; font-weight: bold; margin: 0; }
     .teks-terisi { color: #FF0000; font-size: 70px; font-weight: bold; margin: 0; }
 </style>
@@ -40,6 +43,9 @@ while True:
     with placeholder.container():
         st.markdown(f"""
         <div class="led-container">
+            <div style="text-align: center; margin-bottom: 15px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Logo_Kementerian_Perhubungan.svg" width="100">
+            </div>
             <div class="teks-judul">INFORMASI PARKIR ON STREET</div>
             <div class="teks-kosong">KOSONG : {total_kosong}</div>
             <div class="teks-terisi">TERISI : {total_terisi}</div>
