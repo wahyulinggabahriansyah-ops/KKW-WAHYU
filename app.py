@@ -38,6 +38,24 @@ st.markdown("""
 st.title("SIMULASI PAPAN INFORMASI")
 placeholder = st.empty()
 
+# Sidebar untuk data internal / admin (Dibuat sekali di luar loop agar stabil dan tidak kedip)
+st.sidebar.markdown("### 🔒 PANEL ADMIN (INTERNAL)")
+
+# Tombol reset diletakkan di sidebar
+if st.sidebar.button("Reset Total Kumulatif", key="btn_reset"):
+    try:
+        conn = sqlite3.connect('parkir.db')
+        cursor = conn.cursor()
+        cursor.execute("UPDATE status_kamera SET total_masuk = 0")
+        conn.commit()
+        conn.close()
+        st.sidebar.success("Berhasil di-reset ke 0!")
+    except Exception as e:
+        st.sidebar.error(f"Gagal mereset: {e}")
+
+# Metric placeholder diletakkan di sidebar untuk update real-time
+sidebar_metric_placeholder = st.sidebar.empty()
+
 while True:
     try:
         # Menghubungkan ke database dan membaca data
@@ -58,7 +76,7 @@ while True:
     except Exception as e:
         total_kosong, total_terisi, total_masuk = 0, 0, 0
 
-    # Merender ulang tampilan antarmuka
+    # Merender ulang tampilan utama (Papan LED)
     with placeholder.container():
         st.markdown(f"""
         <div class="led-container">
@@ -67,8 +85,11 @@ while True:
             <div class="teks-judul">INFORMASI PARKIR ON STREET</div>
             <div class="teks-kosong">KOSONG : {total_kosong}</div>
             <div class="teks-terisi">TERISI : {total_terisi}</div>
-            <div class="teks-masuk">TOTAL MASUK : {total_masuk}</div>
         </div>
         """, unsafe_allow_html=True)
     
+    # Merender ulang tampilan sidebar (Panel Admin / Internal)
+    with sidebar_metric_placeholder.container():
+        st.metric(label="Total Kumulatif Kendaraan Parkir", value=total_masuk)
+        
     time.sleep(1)
