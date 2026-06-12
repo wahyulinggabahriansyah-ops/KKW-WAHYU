@@ -27,10 +27,11 @@ st.markdown("""
     * {
         font-family: 'Times New Roman', Times, serif !important;
     }
-    .led-container { position: relative; background-color: #000000; padding: 50px 30px 45px 30px; border-radius: 15px; border: 4px solid #333; text-align: center; }
-    .teks-judul { color: #FFFFFF; font-size: 40px; font-weight: bold; margin-top: 10px; margin-bottom: 25px; padding-left: 90px; padding-right: 90px; line-height: 1.2; }
-    .teks-kosong { color: #00FF00; font-size: 70px; font-weight: bold; margin: 20px 0 10px 0; line-height: 1.2; }
-    .teks-terisi { color: #FF0000; font-size: 70px; font-weight: bold; margin: 10px 0 20px 0; line-height: 1.2; }
+    .led-container { position: relative; background-color: #000000; padding: 40px 30px; border-radius: 15px; border: 4px solid #333; text-align: center; }
+    .teks-judul { color: #FFFFFF; font-size: 38px; font-weight: bold; margin-top: 20px; margin-bottom: 25px; padding-left: 90px; padding-right: 90px; line-height: 1.2; }
+    .teks-kosong { color: #00FF00; font-size: 60px; font-weight: bold; margin: 10px 0; line-height: 1.2; }
+    .teks-terisi { color: #FF0000; font-size: 60px; font-weight: bold; margin: 10px 0; line-height: 1.2; }
+    .teks-masuk { color: #FFFF00; font-size: 60px; font-weight: bold; margin: 10px 0; line-height: 1.2; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -43,18 +44,19 @@ while True:
         conn = sqlite3.connect('parkir.db')
         
         # Query cerdas: Langsung menjumlahkan (SUM) kolom dari semua kamera yang terdaftar
-        df = pd.read_sql_query("SELECT SUM(total_kosong) as kosong, SUM(total_terisi) as terisi FROM status_kamera", conn)
+        df = pd.read_sql_query("SELECT SUM(total_kosong) as kosong, SUM(total_terisi) as terisi, SUM(total_masuk) as masuk FROM status_kamera", conn)
         conn.close()
         
         # Mengekstrak angka jika database tidak kosong
         if not df.empty and pd.notna(df['kosong'][0]):
             total_kosong = int(df['kosong'][0])
             total_terisi = int(df['terisi'][0])
+            total_masuk = int(df['masuk'][0]) if pd.notna(df['masuk'][0]) else 0
         else:
-            total_kosong, total_terisi = 0, 0
+            total_kosong, total_terisi, total_masuk = 0, 0, 0
             
     except Exception as e:
-        total_kosong, total_terisi = 0, 0
+        total_kosong, total_terisi, total_masuk = 0, 0, 0
 
     # Merender ulang tampilan antarmuka
     with placeholder.container():
@@ -65,6 +67,7 @@ while True:
             <div class="teks-judul">INFORMASI PARKIR ON STREET</div>
             <div class="teks-kosong">KOSONG : {total_kosong}</div>
             <div class="teks-terisi">TERISI : {total_terisi}</div>
+            <div class="teks-masuk">TOTAL MASUK : {total_masuk}</div>
         </div>
         """, unsafe_allow_html=True)
     
