@@ -17,7 +17,7 @@ except ValueError:
 
 # Tentukan nama file JSON berdasarkan kamera
 if kamera_num == 1:
-    json_filename = "koordinat_parkir.json"
+    json_filename = "koordinat_parkir_1.json"
 else:
     json_filename = f"koordinat_parkir_{kamera_num}.json"
 

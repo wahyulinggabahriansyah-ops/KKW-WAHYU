@@ -93,12 +93,12 @@ while True:
             if cls_id in kelas_kendaraan:
                 x1, y1, x2, y2 = map(int, box.xyxy[0])
                 cx = int((x1 + x2) / 2)
-                cy = int(y2) # Titik ban menyentuh aspal
+                cy = int((y1 + y2) / 2) # Titik tengah kendaraan
                 
                 # Visualisasi titik kuning untuk kalibrasi mapping
                 cv2.circle(frame, (cx, cy), 8, (0, 255, 255), -1) 
                 
-                # Cek perpotongan titik ban dengan poligon
+                # Cek perpotongan titik tengah dengan poligon
                 for i, area in enumerate(area_parkir_list):
                     hasil_cek = cv2.pointPolygonTest(area, (cx, cy), False)
                     if hasil_cek >= 0:

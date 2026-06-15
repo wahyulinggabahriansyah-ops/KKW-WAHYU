@@ -19,7 +19,7 @@ Sistem Pemantauan Parkir Pintar berbasis **Computer Vision**, **Artificial Intel
 ```text
 ├── parkir_env/               # Virtual Environment Python (opsional/lokal)
 ├── data/                     # Data tambahan (jika ada)
-├── koordinat_parkir.json     # Konfigurasi koordinat petak Kamera 01
+├── koordinat_parkir_1.json   # Konfigurasi koordinat petak Kamera 01
 ├── koordinat_parkir_2.json   # Konfigurasi koordinat petak Kamera 02
 ├── koordinat_parkir_3.json   # Konfigurasi koordinat petak Kamera 03
 ├── setup_db.py               # Script untuk membuat & menginisialisasi database SQLite

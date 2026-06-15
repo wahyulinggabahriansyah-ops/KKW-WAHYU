@@ -20,18 +20,101 @@ try:
 except Exception as e:
     pass
 
-st.set_page_config(page_title="Papan Parkir Digital", layout="centered")
+# Mengonversi foto BG STTD menjadi base64 agar dapat dimuat oleh Streamlit secara lokal sebagai latar belakang
+bg_sttd_base64 = ""
+try:
+    with open("BG STTD.jpeg", "rb") as image_file:
+        bg_sttd_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+except Exception as e:
+    pass
+
+st.set_page_config(page_title="Papan Parkir Digital", layout="wide")
+
+# Inject latar belakang gambar BG STTD
+if bg_sttd_base64:
+    st.markdown(f"""
+    <style>
+        .stApp::before {{
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url("data:image/jpeg;base64,{bg_sttd_base64}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.75;
+            z-index: -1;
+        }}
+    </style>
+    """, unsafe_allow_html=True)
 
 st.markdown("""
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Share+Tech+Mono&display=swap');
+    
     * {
-        font-family: 'Times New Roman', Times, serif !important;
+        font-family: 'Orbitron', 'Share Tech Mono', monospace !important;
     }
-    .led-container { position: relative; background-color: #000000; padding: 40px 30px; border-radius: 15px; border: 4px solid #333; text-align: center; }
-    .teks-judul { color: #FFFFFF; font-size: 38px; font-weight: bold; margin-top: 20px; margin-bottom: 25px; padding-left: 90px; padding-right: 90px; line-height: 1.2; }
-    .teks-kosong { color: #00FF00; font-size: 60px; font-weight: bold; margin: 10px 0; line-height: 1.2; }
-    .teks-terisi { color: #FF0000; font-size: 60px; font-weight: bold; margin: 10px 0; line-height: 1.2; }
-    .teks-masuk { color: #FFFF00; font-size: 60px; font-weight: bold; margin: 10px 0; line-height: 1.2; }
+    
+    h1 {
+        text-align: center !important;
+        margin-bottom: 30px !important;
+    }
+    
+    .main {
+        background: transparent !important;
+    }
+    
+    .main .block-container {
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        padding-top: 3rem !important;
+        background: transparent !important;
+    }
+    
+    .led-container { 
+        position: relative; 
+        background-color: #000000; 
+        padding: 60px 40px; 
+        border-radius: 15px; 
+        border: 6px solid #FFCC00; 
+        text-align: center; 
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    
+    .teks-judul { 
+        color: #FFFFFF; 
+        font-size: 52px; 
+        font-weight: 900; 
+        margin-top: 30px; 
+        margin-bottom: 40px; 
+        padding-left: 130px; 
+        padding-right: 130px; 
+        letter-spacing: 2px;
+        line-height: 1.2; 
+    }
+    
+    .teks-kosong { 
+        color: #00FF00; 
+        font-size: 110px; 
+        font-weight: 900; 
+        margin: 20px 0; 
+        letter-spacing: 4px;
+        line-height: 1.1; 
+    }
+    
+    .teks-terisi { 
+        color: #FF0000; 
+        font-size: 110px; 
+        font-weight: 900; 
+        margin: 20px 0; 
+        letter-spacing: 4px;
+        line-height: 1.1; 
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -80,8 +163,8 @@ while True:
     with placeholder.container():
         st.markdown(f"""
         <div class="led-container">
-            <img src="data:image/png;base64,{logo_kemenhub_base64}" width="75" style="position: absolute; top: 15px; left: 15px; object-fit: contain;">
-            <img src="data:image/png;base64,{logo_base64}" width="75" style="position: absolute; top: 15px; right: 15px; object-fit: contain;">
+            <img src="data:image/png;base64,{logo_kemenhub_base64}" width="115" style="position: absolute; top: 25px; left: 25px; object-fit: contain;">
+            <img src="data:image/png;base64,{logo_base64}" width="115" style="position: absolute; top: 25px; right: 25px; object-fit: contain;">
             <div class="teks-judul">INFORMASI PARKIR ON STREET</div>
             <div class="teks-kosong">KOSONG : {total_kosong}</div>
             <div class="teks-terisi">TERISI : {total_terisi}</div>
