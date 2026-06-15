@@ -22,29 +22,40 @@ except Exception as e:
 
 # Mengonversi foto BG STTD menjadi base64 agar dapat dimuat oleh Streamlit secara lokal sebagai latar belakang
 bg_sttd_base64 = ""
+bg_mime = "image/jpeg"
 try:
-    with open("BG STTD.jpeg", "rb") as image_file:
+    with open("BG STTD.png", "rb") as image_file:
         bg_sttd_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+        bg_mime = "image/png"
 except Exception as e:
-    pass
+    try:
+        with open("BG STTD.jpeg", "rb") as image_file:
+            bg_sttd_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+            bg_mime = "image/jpeg"
+    except Exception as e2:
+        pass
 
 st.set_page_config(page_title="Papan Parkir Digital", layout="wide")
 
-# Inject latar belakang gambar BG STTD
+# Inject latar belakang gambar BG STTD dengan efek buram (blur) sekitar 75%
 if bg_sttd_base64:
     st.markdown(f"""
     <style>
+        .stApp, [data-testid="stAppViewContainer"], [data-testid="stMainViewContainer"] {{
+            background: transparent !important;
+        }}
         .stApp::before {{
             content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url("data:image/jpeg;base64,{bg_sttd_base64}");
+            top: -10px;
+            left: -10px;
+            width: calc(100vw + 20px);
+            height: calc(100vh + 20px);
+            background-image: url("data:{bg_mime};base64,{bg_sttd_base64}");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
+            filter: blur(5px);
             opacity: 0.75;
             z-index: -1;
         }}
@@ -53,15 +64,20 @@ if bg_sttd_base64:
 
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Share+Tech+Mono&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Orbitron:wght@600;800;900&family=Share+Tech+Mono&display=swap');
     
     * {
         font-family: 'Orbitron', 'Share Tech Mono', monospace !important;
     }
     
     h1 {
+        font-family: 'Anton', 'Impact', sans-serif !important;
+        font-size: 64px !important;
         text-align: center !important;
         margin-bottom: 30px !important;
+        font-weight: 900 !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
     }
     
     .main {
@@ -77,7 +93,7 @@ st.markdown("""
     
     .led-container { 
         position: relative; 
-        background-color: #000000; 
+        background-color: #1e1e1e; 
         padding: 60px 40px; 
         border-radius: 15px; 
         border: 6px solid #FFCC00; 
